@@ -485,4 +485,238 @@ export const SemanticOntologySchema = {
       example: "⏮️ Revisit the original complaint before continuing.",
     },
   },
+  /** 
+ * 📚 Retrieval Category
+ * 
+ *  Guides how retrieval agents generate, expand, refine, and filter queries.
+ * 
+ * Contains:
+ * - `coreTerm` (🔑) — Primary search term derived directly from Latest User Input
+ * - `broadTerm` (🌐) — Broader contextual or synonymous search term
+ * - `precisionTerm` (🎯) — Narrow, targeted search term used to disambiguate
+ * - `include` (📥) — Explicit instruction to include a memory cluster
+ * - `exclude` (📤) — Explicit instruction to exclude a memory cluster
+ * 
+ */
+  retrieval: {
+    coreTerm: {
+      emoji: "🔑",
+      role: "RETRIEVAL",
+      meaning: "Primary search term derived directly from Latest User Input.",
+      usage: "REQUIRED",
+      example: "🔑 retaliation",
+      allowedContext: ["HUMAN", "LLM"],
+      conflictsWith: [],
+    },
+    broadTerm: {
+      emoji: "🌐",
+      role: "RETRIEVAL",
+      meaning: "Broader contextual or synonymous search term.",
+      usage: "OPTIONAL",
+      example: "🌐 hostile environment",
+      allowedContext: ["HUMAN", "LLM"],
+      conflictsWith: ["🎯"],
+    },
+    precisionTerm: {
+      emoji: "🎯",
+      role: "RETRIEVAL",
+      meaning: "Narrow, targeted search term used to disambiguate.",
+      usage: "OPTIONAL",
+      example: "🎯 FERPA denial of amendment",
+      conflictsWith: ["🌐"],
+      allowedContext: ["HUMAN", "LLM"],
+    },
+    include: {
+      emoji: "📥",
+      role: "RETRIEVAL",
+      meaning: "Explicit instruction to include a memory cluster.",
+      usage: "CONDITIONAL",
+      example: "📥 Include all communications regarding access to records.",
+      conflictsWith: ["📤"],
+      allowedContext: ["HUMAN", "LLM"],
+    },
+    exclude: {
+      emoji: "📤",
+      role: "RETRIEVAL",
+      meaning: "Explicit instruction to exclude a memory cluster.",
+      usage: "CONDITIONAL",
+      example: "📤 Exclude irrelevant disciplinary history.",
+      conflictsWith: ["📥"],
+      allowedContext: ["HUMAN", "LLM"],
+    },
+  },
+
+  /**   
+   * 🧩 Record Quality & Data Integrity
+   *    
+   * Allows AI to reason about missing, incomplete, inconsistent, or derived data.
+   * 
+   * Contains:
+   * - `incomplete` (🧩) — Record exists but is incomplete or missing required fields
+   * - `missing` (🛑) — Record expected under law or policy is missing entirely
+   * - `tampered` (🏷️) — Record appears inconsistent or possibly altered
+   * - `derived` (🧮) — This output is a synthesized aggregation, not a direct memory
+   *  
+   */
+  integrity: {
+    incomplete: {
+      emoji: "🧩",
+      role: "INTEGRITY",
+      meaning: "Record exists but is incomplete or missing required fields.",
+      example: "🧩 Parent request logged but no date of receipt recorded.",
+      allowedContext: ["HUMAN", "LLM"],
+      usage: "CONDITIONAL",
+      conflictsWith: [],
+    },
+    missing: {
+      emoji: "🛑",
+      role: "INTEGRITY",
+      meaning: "Record expected under law or policy is missing entirely.",
+      example: "🛑 No Title IX notice of allegations was generated.",
+      allowedContext: ["HUMAN", "LLM"],
+      usage: "CONDITIONAL",
+      conflictsWith: [],
+    },
+    tampered: {
+      emoji: "🏷️",
+      role: "INTEGRITY",
+      meaning: "Record appears inconsistent or possibly altered.",
+      example: "🏷️ Metadata timestamp does not match content update.",
+      allowedContext: ["HUMAN", "LLM"],
+      usage: "CONDITIONAL",
+      conflictsWith: [],
+    },
+    derived: {
+      emoji: "🧮",
+      role: "INTEGRITY",
+      meaning: "This output is a synthesized aggregation, not a direct memory.",
+      example: "🧮 Combined record of all emails referencing retaliation.",
+      allowedContext: ["HUMAN", "LLM"],
+      usage: "CONDITIONAL",
+      conflictsWith: [],
+    },
+  },
+
+  /**      
+   * 🔎 Meta-Reasoning & Traceability  
+   * 
+   * Essential for auditability and legal defensibility.
+   * 
+   * Contains:
+   * - `trace` (🔎) — Show which memory clusters influenced the output without revealing chain-of-thought
+   * - `evidenceSet` (🗃️) — A grouped set of related evidence records
+   * - `confidence` (📊) — Model's confidence in the correctness or completeness of retrieval   
+   */
+  traceability: {
+    trace: {
+      emoji: "🔎",
+      role: "TRACE",
+      meaning: "Show which memory clusters influenced the output without revealing chain-of-thought.",
+      example: "🔎 Influencing memories: IDs 14, 17, 22.",
+      allowedContext: ["HUMAN", "LLM"],
+      usage: "CONDITIONAL",
+      conflictsWith: [],
+    },
+    evidenceSet: {
+      emoji: "🗃️",
+      role: "TRACE",
+      meaning: "A grouped set of related evidence records.",
+      example: "🗃️ EvidenceSet B: All district responses to data requests.",
+      allowedContext: [],
+      usage: "CONDITIONAL",
+      conflictsWith: []
+    },
+    confidence: {
+      emoji: "📊",
+      role: "TRACE",
+      meaning: "Model's confidence in the correctness or completeness of retrieval.",
+      example: "📊 Confidence: Medium (sparse matches for secondary terms).",
+      allowedContext: [],
+      usage: "CONDITIONAL",
+      conflictsWith: []
+    },
+  },
+
+  /**
+   *      
+   * ⏱️ Temporal Reasoning
+   *       
+   * Enables timeline analysis and violation detection.
+   * 
+   * Contains:
+   * - `deadline` (⏱️) — A legally mandated timeline or required procedural limit
+   * - `eventDate` (📅) — A memory associated with a specific date
+   * - `lag` (🕰️) — Delay between a required action and actual action   
+   */
+  temporal: {
+    deadline: {
+      emoji: "⏱️",
+      role: "TEMPORAL",
+      meaning: "A legally mandated timeline or required procedural limit.",
+      example: "⏱️ FERPA requires records access within 45 days.",
+      allowedContext: [],
+      usage: "CONDITIONAL",
+      conflictsWith: []
+    },
+    eventDate: {
+      emoji: "📅",
+      role: "TEMPORAL",
+      meaning: "A memory associated with a specific date.",
+      example: "📅 Request submitted on 11/14/24.",
+      allowedContext: [],
+      usage: "CONDITIONAL",
+      conflictsWith: []
+    },
+    lag: {
+      emoji: "🕰️",
+      role: "TEMPORAL",
+      meaning: "Delay between a required action and actual action.",
+      example: "🕰️ 19-day delay beyond statutory allowance.",
+      allowedContext: [],
+      usage: "CONDITIONAL",
+      conflictsWith: []
+    },
+  },
+
+  /**   
+   * 🧱 Behavioral Constraints
+   *    
+   * Prevents drift, overreach, and hallucination.
+   * 
+   * Contains:
+   * - `boundary` (🧱) — This conceptual boundary must not be crossed
+   * - `dependency` (🪢) — This step depends on prior data being available
+   * - `policyGoal` (🧭) — High-level goal the model must preserve throughout steps
+   * 
+   */
+  constraints: {
+    boundary: {
+      emoji: "🧱",
+      role: "CONSTRAINT",
+      meaning: "This conceptual boundary must not be crossed.",
+      example: "🧱 Do not infer non-existent memories.",
+      allowedContext: [],
+      usage: "CONDITIONAL",
+      conflictsWith: []
+    },
+    dependency: {
+      emoji: "🪢",
+      role: "CONSTRAINT",
+      meaning: "This step depends on prior data being available.",
+      example: "🪢 Ranking cannot occur before aggregation.",
+      allowedContext: [],
+      usage: "CONDITIONAL",
+      conflictsWith: []
+    },
+    policyGoal: {
+      emoji: "🧭",
+      role: "CONSTRAINT",
+      meaning: "High-level goal the model must preserve throughout steps.",
+      example: "🧭 Prioritize legal compliance and factual accuracy.",
+      allowedContext: [],
+      usage: "CONDITIONAL",
+      conflictsWith: []
+    },
+  },
+
 } as const satisfies SceOntologyBase;

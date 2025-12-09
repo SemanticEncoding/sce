@@ -75,7 +75,12 @@ export type SceRole =
   | "PRIVACY"
   | "ACTOR"
   | "STATE"
-  | "CONTROL";
+  | "CONTROL"
+  | "TRACE"
+  | "TEMPORAL"
+  | "CONSTRAINT"
+  | "INTEGRITY"
+  | "RETRIEVAL";
 
 /**
  * Discriminated union of valid execution contexts for SCE symbols.
@@ -191,6 +196,24 @@ export interface SceOntologyCategory {
   [key: string]: SceSymbolDefinition;
 }
 
+const BaseOntologyCategoryKeyValues = [
+  "structure",
+  "legalPolicy",
+  "reasoning",
+  "tasks",
+  "privacy",
+  "actors",
+  "state",
+  "control",
+  "traceability",
+  "temporal",
+  "constraints",
+  "integrity",
+  "retrieval",
+] as const;
+
+export type BaseOntologyCategoryKey = typeof BaseOntologyCategoryKeyValues[number];
+
 /**
  * Base structure for a complete SCE ontology.
  *
@@ -241,16 +264,9 @@ export interface SceOntologyCategory {
  * } as const satisfies SceOntologyBase;
  * ```
  */
-export interface SceOntologyBase {
-  structure: SceOntologyCategory;
-  legalPolicy: SceOntologyCategory;
-  reasoning: SceOntologyCategory;
-  tasks: SceOntologyCategory;
-  privacy: SceOntologyCategory;
-  actors: SceOntologyCategory;
-  state: SceOntologyCategory;
-  control: SceOntologyCategory;
-}
+export type SceOntologyBase = {
+  [K in BaseOntologyCategoryKey]: SceOntologyCategory;
+};
 
 /**
  * Extracts the union of category keys from an ontology.
@@ -341,8 +357,8 @@ export type SceOntologyEmojiMap<TOntology extends SceOntologyBase> = {
     >[DefinitionKey] extends {
       emoji: infer E;
     }
-      ? E
-      : never;
+    ? E
+    : never;
   };
 };
 
