@@ -27,7 +27,7 @@
   "homepage": "https://semanticencoding.github.io/sce/",
   "bin": {
     "sce": "dist/cli.js",
-    "sce-mcp": "dist/sce-mcp-server.js"
+    "semanticencoding": "dist/sce-mcp-server.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
