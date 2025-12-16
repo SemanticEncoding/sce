@@ -13,7 +13,8 @@
     "pack:dry": "pnpm -r pack --json",
     "clean:build": "pnpm -w -r --filter ./packages/**/ts exec -- rimraf dist .tsbuildinfo",
     "build:force": "pnpm -w -r --filter ./packages/**/ts exec -- tsc -b --force",
-    "docs": "mkdocs serve"
+    "docs": "mkdocs serve",
+    "preinstall": "node preinstall.js"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",

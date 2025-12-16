@@ -575,6 +575,44 @@ const server = new McpServer({
   version: "0.1.0",
 });
 
+// Reusable Zod schemas keep type inference shallow and consistent across handlers.
+const ExplainInputSchema = z.object({
+  text: z
+    .string()
+    .min(1, "Input text must not be empty")
+    .describe(
+      "Text that may contain SCE symbols (e.g. '📌 Fact ⏳ pending ⚠️ risk')."
+    ),
+  format: OutputFormatSchema.describe(
+    "Optional output formatting override."
+  ).optional(),
+});
+
+const ValidateInputSchema = z.object({
+  format: OutputFormatSchema.describe(
+    "Optional output formatting override."
+  ).optional(),
+});
+
+const SuggestInputSchema = z.object({
+  text: z
+    .string()
+    .min(1, "Input text must not be empty")
+    .describe(
+      "Freeform text (e.g. instructions, case notes) for which to suggest SCE annotations."
+    ),
+  maxSuggestions: z
+    .number()
+    .int()
+    .min(1)
+    .max(20)
+    .default(10)
+    .describe("Maximum number of suggestions to return."),
+  format: OutputFormatSchema.describe(
+    "Optional output formatting override."
+  ).optional(),
+});
+
 /**
  * MCP Tool: Extract and explain SCE symbols from text.
  *
@@ -606,12 +644,7 @@ const server = new McpServer({
  * ```
  */
 export async function handleExplainTool(input: unknown) {
-  const parsed = z
-    .object({
-      text: z.string(),
-      format: OutputFormatSchema.optional(),
-    })
-    .parse(input);
+  const parsed = ExplainInputSchema.parse(input);
 
   const { text, format } = parsed;
   const symbols = getDefinitionsFromText(text);
@@ -670,18 +703,7 @@ server.registerTool(
   {
     description:
       "Extract and explain SCE semantic symbols from text, returning structured definitions.",
-    // 🔴 use ZodRawShape here
-    inputSchema: {
-      text: z
-        .string()
-        .min(1, "Input text must not be empty")
-        .describe(
-          "Text that may contain SCE symbols (e.g. '📌 Fact ⏳ pending ⚠️ risk')."
-        ),
-      format: OutputFormatSchema.describe(
-        "Optional output formatting override."
-      ).optional(),
-    },
+    inputSchema: ExplainInputSchema,
   },
   handleExplainTool
 );
@@ -718,11 +740,7 @@ server.registerTool(
  * ```
  */
 export async function handleValidateTool(input: unknown) {
-  const parsed = z
-    .object({
-      format: OutputFormatSchema.optional(),
-    })
-    .parse(input);
+  const parsed = ValidateInputSchema.parse(input);
 
   const { format } = parsed;
   const issues =
@@ -783,11 +801,7 @@ server.registerTool(
   {
     description:
       "Validate the active SCE ontology and return any structural or semantic issues.",
-    inputSchema: {
-      format: OutputFormatSchema.describe(
-        "Optional output formatting override."
-      ).optional(),
-    },
+    inputSchema: ValidateInputSchema,
   },
   handleValidateTool
 );
@@ -827,13 +841,7 @@ server.registerTool(
  * ```
  */
 export async function handleSuggestTool(input: unknown) {
-  const parsed = z
-    .object({
-      text: z.string(),
-      maxSuggestions: z.number().int().min(1).max(20).default(10),
-      format: OutputFormatSchema.optional(),
-    })
-    .parse(input);
+  const parsed = SuggestInputSchema.parse(input);
 
   const { text, maxSuggestions, format } = parsed;
 
@@ -895,24 +903,7 @@ server.registerTool(
   {
     description:
       "Suggest SCE semantic symbols that might apply to the given freeform text.",
-    inputSchema: {
-      text: z
-        .string()
-        .min(1, "Input text must not be empty")
-        .describe(
-          "Freeform text (e.g. instructions, case notes) for which to suggest SCE annotations."
-        ),
-      maxSuggestions: z
-        .number()
-        .int()
-        .min(1)
-        .max(20)
-        .default(10)
-        .describe("Maximum number of suggestions to return."),
-      format: OutputFormatSchema.describe(
-        "Optional output formatting override."
-      ).optional(),
-    },
+    inputSchema: SuggestInputSchema,
   },
   handleSuggestTool
 );
