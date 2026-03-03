@@ -49,8 +49,8 @@
     "test:cover": "jest --coverage --config ./jest.config.cjs"
   },
   "dependencies": {
-    "@semanticencoding/core": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.22.0",
+    "@semanticencoding/core": "workspace:*",
     "zod": "3.25.76"
   },
   "repository": {

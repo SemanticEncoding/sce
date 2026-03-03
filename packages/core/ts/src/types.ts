@@ -288,7 +288,7 @@ export type SceOntologyBase = {
  * ```
  */
 export type SceOntologyCategoryKey<
-  TOntology extends SceOntologyBase = SceOntologyBase
+  TOntology extends Partial<SceOntologyBase> = SceOntologyBase
 > = keyof TOntology;
 
 /**
@@ -387,8 +387,8 @@ export type SceOntologyEmojiMap<TOntology extends SceOntologyBase> = {
  * type ReasoningEmojis = CategoryEmojiMap['reasoning']; // "🔍" | "🧠" | "🕵️"
  * ```
  */
-export type SceOntologyCategoryEmojiMap<TOntology extends SceOntologyBase> = {
-  [CategoryKey in SceOntologyCategoryKey<TOntology>]: SceOntologyEmojiMap<TOntology>[CategoryKey][keyof SceOntologyEmojiMap<TOntology>[CategoryKey]];
+export type SceOntologyCategoryEmojiMap<TOntology extends Partial<SceOntologyBase>> = {
+  [CategoryKey in SceOntologyCategoryKey<TOntology>]: SceOntologyEmojiMap<TOntology & SceOntologyBase>[CategoryKey][keyof SceOntologyEmojiMap<TOntology & SceOntologyBase>[CategoryKey]];
 };
 
 /**
@@ -448,8 +448,8 @@ export type SceOntologyCategoryEmoji<
  * }
  * ```
  */
-export type SceOntologyEmoji<TOntology extends SceOntologyBase> =
-  SceOntologyCategoryEmojiMap<TOntology>[SceOntologyCategoryKey<TOntology>];
+export type SceOntologyEmoji<TOntology extends Partial<SceOntologyBase> = SceOntologyBase> =
+  SceOntologyCategoryEmojiMap<TOntology & SceOntologyBase>[SceOntologyCategoryKey<TOntology & SceOntologyBase>];
 
 /**
  * Runtime interface for an ontology interpreter implementation.

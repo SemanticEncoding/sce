@@ -154,7 +154,7 @@ describe("utility helpers", () => {
 });
 
 describe("custom ontology interpreters", () => {
-  const customOntology = {
+  const customOntology: Partial<SceOntologyBase> = {
     structure: {
       block: {
         emoji: "🏗️",
@@ -243,7 +243,7 @@ describe("custom ontology interpreters", () => {
         example: "🪢 Evaluate branch.",
       },
     },
-  } as const satisfies SceOntologyBase;
+  } as const;
 
   type CustomEmoji = SceOntologyEmoji<typeof customOntology>;
   const CUSTOM_STRUCTURE_EMOJI: CustomEmoji = "🏗️";
@@ -262,14 +262,14 @@ describe("custom ontology interpreters", () => {
       "Workflow " +
       CUSTOM_STRUCTURE_EMOJI +
       " moves to " +
-      customOntology.control.branch.emoji +
+      customOntology.control!.branch!.emoji +
       ".";
     const emojis = customInterpreter.emojiFromText(text);
 
     expect(emojis).toEqual(
       expect.arrayContaining([
         CUSTOM_STRUCTURE_EMOJI,
-        customOntology.control.branch.emoji,
+        customOntology.control!.branch!.emoji,
       ])
     );
   });

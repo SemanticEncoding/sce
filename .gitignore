@@ -16,4 +16,4 @@ node_modules
 packages/core/ts/README.md
 packages/semanticencoding/ts/README.md
 packages/*/ts/*.tgz
-./*.tgz
+./*.t?gz

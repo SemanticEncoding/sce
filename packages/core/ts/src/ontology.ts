@@ -622,7 +622,7 @@ export const SemanticOntologySchema = {
       role: "TRACE",
       meaning: "A grouped set of related evidence records.",
       example: "🗃️ EvidenceSet B: All district responses to data requests.",
-      allowedContext: [],
+      allowedContext: ["HUMAN", "LLM"],
       usage: "CONDITIONAL",
       conflictsWith: []
     },
@@ -631,7 +631,7 @@ export const SemanticOntologySchema = {
       role: "TRACE",
       meaning: "Model's confidence in the correctness or completeness of retrieval.",
       example: "📊 Confidence: Medium (sparse matches for secondary terms).",
-      allowedContext: [],
+      allowedContext: ["HUMAN", "LLM"],
       usage: "CONDITIONAL",
       conflictsWith: []
     },
@@ -654,7 +654,7 @@ export const SemanticOntologySchema = {
       role: "TEMPORAL",
       meaning: "A legally mandated timeline or required procedural limit.",
       example: "⏱️ FERPA requires records access within 45 days.",
-      allowedContext: [],
+      allowedContext: ["HUMAN", "LLM"],
       usage: "CONDITIONAL",
       conflictsWith: []
     },
@@ -663,7 +663,7 @@ export const SemanticOntologySchema = {
       role: "TEMPORAL",
       meaning: "A memory associated with a specific date.",
       example: "📅 Request submitted on 11/14/24.",
-      allowedContext: [],
+      allowedContext: ["HUMAN", "LLM"],
       usage: "CONDITIONAL",
       conflictsWith: []
     },
@@ -672,7 +672,7 @@ export const SemanticOntologySchema = {
       role: "TEMPORAL",
       meaning: "Delay between a required action and actual action.",
       example: "🕰️ 19-day delay beyond statutory allowance.",
-      allowedContext: [],
+      allowedContext: ["HUMAN", "LLM"],
       usage: "CONDITIONAL",
       conflictsWith: []
     },
@@ -695,7 +695,7 @@ export const SemanticOntologySchema = {
       role: "CONSTRAINT",
       meaning: "This conceptual boundary must not be crossed.",
       example: "🧱 Do not infer non-existent memories.",
-      allowedContext: [],
+      allowedContext: ["HUMAN", "LLM"],
       usage: "CONDITIONAL",
       conflictsWith: []
     },
@@ -704,7 +704,7 @@ export const SemanticOntologySchema = {
       role: "CONSTRAINT",
       meaning: "This step depends on prior data being available.",
       example: "🪢 Ranking cannot occur before aggregation.",
-      allowedContext: [],
+      allowedContext: ["HUMAN", "LLM"],
       usage: "CONDITIONAL",
       conflictsWith: []
     },
@@ -713,7 +713,7 @@ export const SemanticOntologySchema = {
       role: "CONSTRAINT",
       meaning: "High-level goal the model must preserve throughout steps.",
       example: "🧭 Prioritize legal compliance and factual accuracy.",
-      allowedContext: [],
+      allowedContext: ["HUMAN", "LLM"],
       usage: "CONDITIONAL",
       conflictsWith: []
     },
