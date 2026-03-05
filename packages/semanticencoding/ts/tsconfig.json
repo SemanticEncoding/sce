@@ -28,10 +28,10 @@
         "src/**/*",
     ],
     "exclude": [
-        "coverage/",
-        "coverage/**/*",
-        "dist/**/*",
+        "**/coverage/**",
+        "**/dist/**",
         "node_modules",
+        "**/tests/**",
         "**/*.test.ts"
     ]
 }

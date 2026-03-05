@@ -8,7 +8,7 @@ module.exports = [
       "node_modules/**/*",
       "dist/**/*",
       ".tsbuildinfo",
-      "tests/**/*",
+      "**/tests/**",
       "coverage/**/*",
     ],
   },

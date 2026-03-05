@@ -60,11 +60,11 @@
     "test:cover": "jest --coverage --config ./jest.config.cjs"
   },
   "devDependencies": {
-    "@types/node": "^24.10.1",
+    "@types/node": "25.2.3",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.22.0",
+    "@modelcontextprotocol/sdk": "1.25.2",
     "@semanticencoding/core": "workspace:*",
     "zod": "3.25.76"
   },
