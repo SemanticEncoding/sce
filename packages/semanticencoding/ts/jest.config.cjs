@@ -1,5 +1,3 @@
-const { filter } = require("lodash");
-
 const swcTransform = [
   "@swc/jest",
   {

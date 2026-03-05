@@ -9,7 +9,7 @@
  * transport connection while preserving strong local typing for handler results.
  *
  * @remarks
- * - See {@link ./mcp-server.types.d.ts} for comprehensive documentation of the exported types.
+ * - This file provides the canonical source for exported MCP server type contracts.
  */
 
 export type ToolResponse = {

@@ -196,23 +196,20 @@ export interface SceOntologyCategory {
   [key: string]: SceSymbolDefinition;
 }
 
-const BaseOntologyCategoryKeyValues = [
-  "structure",
-  "legalPolicy",
-  "reasoning",
-  "tasks",
-  "privacy",
-  "actors",
-  "state",
-  "control",
-  "traceability",
-  "temporal",
-  "constraints",
-  "integrity",
-  "retrieval",
-] as const;
-
-export type BaseOntologyCategoryKey = typeof BaseOntologyCategoryKeyValues[number];
+export type BaseOntologyCategoryKey =
+  | "structure"
+  | "legalPolicy"
+  | "reasoning"
+  | "tasks"
+  | "privacy"
+  | "actors"
+  | "state"
+  | "control"
+  | "traceability"
+  | "temporal"
+  | "constraints"
+  | "integrity"
+  | "retrieval";
 
 /**
  * Base structure for a complete SCE ontology.
