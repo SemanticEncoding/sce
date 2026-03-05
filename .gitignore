@@ -9,6 +9,11 @@ coverage/
 .turbo
 .DS_Store
 
+# yarn
+.yarn/*
+!.yarn/releases
+!.gitkeep
+
 # pnpm
 node_modules/
 node_modules
