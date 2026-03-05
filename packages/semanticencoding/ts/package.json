@@ -26,11 +26,21 @@
   },
   "homepage": "https://semanticencoding.github.io/sce/",
   "bin": {
-    "sce": "dist/cli.js",
-    "semanticencoding": "dist/sce-mcp-server.js"
+    "sce": "./dist/cli.js",
+    "semanticencoding": "./dist/sce-mcp-server.js"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
   "license": "EthicalUse-1.0",
   "files": [
     "dist/**/*",
@@ -42,11 +52,16 @@
     "access": "public"
   },
   "scripts": {
-    "prepack": "node ../../../scripts/copy-shared-to-packages.js && tsc -b",
-    "build": "tsc -b",
+    "prepack": "node ../../../scripts/copy-shared-to-packages.js && yarn exec tsc -p tsconfig.json",
+    "build": "yarn exec tsc -p tsconfig.json",
+    "build:publish": "yarn build && yarn pack --out ./dist/semanticencoding.tgz",
     "lint": "eslint --config ./eslint.config.cjs",
     "test": "jest --config ./jest.config.cjs",
     "test:cover": "jest --coverage --config ./jest.config.cjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.22.0",

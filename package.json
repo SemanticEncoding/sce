@@ -1,6 +1,9 @@
 {
   "name": "@semanticencoding/monorepo",
   "description": "Monorepo root for an open semantic layer enabling LLM-native communication protocols.  Not for distribution.",
+  "workspaces": [
+    "packages/*/ts"
+  ],
   "private": true,
   "version": "0.0.1",
   "scripts": {
@@ -13,11 +16,12 @@
     "pack:dry": "pnpm -r pack --json",
     "clean:build": "pnpm -w -r --filter ./packages/**/ts exec -- rimraf dist .tsbuildinfo",
     "build:force": "pnpm -w -r --filter ./packages/**/ts exec -- tsc -b --force",
-    "docs": "mkdocs serve",
-    "preinstall": "node preinstall.js"
+    "docs": "mkdocs serve"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
+    "@swc/core": "^1.13.5",
+    "@swc/jest": "^0.2.39",
     "@types/jest": "^29.5.3",
     "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
@@ -25,8 +29,6 @@
     "eslint": "^9.39.1",
     "jest": "^29.6.1",
     "rimraf": "^6.1.0",
-    "@swc/core": "^1.13.5",
-    "@swc/jest": "^0.2.39",
     "ts-node": "^10.9.1",
     "typescript": "^5.9.3"
   },

@@ -25,8 +25,18 @@
     "url": "https://github.com/SemanticEncoding/sce/issues"
   },
   "homepage": "https://semanticencoding.github.io/sce/",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
   "license": "EthicalUse-1.0",
   "files": [
     "dist/**/*",
@@ -40,6 +50,7 @@
   "scripts": {
     "prepack": "node ../../../scripts/copy-shared-to-packages.js && tsc -b",
     "build": "tsc -b",
+    "build:publish": "yarn build && yarn pack --out ./dist/@semanticencoding-core.tgz",
     "lint": "eslint --config ./eslint.config.cjs",
     "test": "jest --config ./jest.config.cjs",
     "test:cover": "jest --coverage --config ./jest.config.cjs"

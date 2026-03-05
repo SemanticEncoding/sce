@@ -13,11 +13,15 @@
         ]
     },
     "include": [
-        "src/**/*",
-        "tests/**/*"
+        "src/**/*"
     ],
     "exclude": [
         "dist/**/*",
         "node_modules"
-    ]
+    ],
+    "references": [
+        {
+            "path": "../../core/ts"
+        }
+    ],
 }

@@ -6,6 +6,7 @@ dist
 # Coverage and editor state
 coverage/
 .vscode/
+.turbo
 .DS_Store
 
 # pnpm

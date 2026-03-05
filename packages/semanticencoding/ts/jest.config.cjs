@@ -1,3 +1,5 @@
+const { filter } = require("lodash");
+
 const swcTransform = [
   "@swc/jest",
   {
@@ -15,7 +17,6 @@ const swcTransform = [
 
 module.exports = {
   testEnvironment: "node",
-  collectCoverage: true,
   coverageDirectory: "coverage",
   coverageReporters: ["text", "lcov"],
   coverageThreshold: {
@@ -30,6 +31,7 @@ module.exports = {
   testMatch: ["**/?(*.)+(spec|test).[jt]s?(x)"],
   moduleFileExtensions: ["ts", "js", "json", "node"],
   moduleNameMapper: {
+    "^@semanticencoding/([^/]+)(/.*)?$": "<rootDir>/../../$1/ts/src$2",
     "^(\\.{1,2}/.*)\\.js$": "$1",
   },
   transform: {
