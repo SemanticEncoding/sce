@@ -3,8 +3,8 @@ const tsEslintPlugin = require("@typescript-eslint/eslint-plugin");
 module.exports = [
   {
     // global ignores and shared settings
-    ignores: [      
-      "**/node_modules/**",      
+    ignores: [
+      "**/node_modules/**",
       "**/dist/**/*",
       "**/coverage/**",
       "**/.tsbuildinfo",
