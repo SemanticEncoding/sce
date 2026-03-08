@@ -8,7 +8,10 @@
     ],
     "references": [
         {
-            "path": "./packages/core/ts"
+            "path": "packages/core/ts",
+        },
+        {
+            "path": "packages/semanticencoding/ts",
         }
     ]
 }
