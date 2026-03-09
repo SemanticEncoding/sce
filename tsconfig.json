@@ -5,13 +5,5 @@
         "**/__tests__/**",
         "**/__mocks__/**",
         "**/tests/**"
-    ],
-    "references": [
-        {
-            "path": "packages/core/ts",
-        },
-        {
-            "path": "packages/semanticencoding/ts",
-        }
     ]
 }
