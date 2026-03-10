@@ -48,7 +48,7 @@
     "access": "public"
   },
   "scripts": {
-    "prepack": "node ../../../scripts/copy-shared-to-packages.js && tsc -b",
+    "prepack": "tsc -b",
     "build": "tsc -b",
     "build:publish": "yarn build && yarn pack --out ./dist/@semanticencoding-core.tgz",
     "lint": "eslint --config ./eslint.config.cjs",
