@@ -131,7 +131,7 @@ import type {
  * });
  * ```
  */
-export const validateOntology = <T extends SceOntologyBase>(
+export const validateOntology = <T extends Partial<SceOntologyBase>>(
   ontology: T = SemanticOntologySchema as unknown as T
 ): string[] => {
   const errors: string[] = [];
@@ -154,8 +154,7 @@ export const validateOntology = <T extends SceOntologyBase>(
 
       if (seenEmojis.has(def.emoji)) {
         errors.push(
-          `Duplicate emoji ${
-            def.emoji
+          `Duplicate emoji ${def.emoji
           } at ${path}, already used at ${seenEmojis.get(def.emoji)}`
         );
       } else {

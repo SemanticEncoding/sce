@@ -90,8 +90,7 @@ export type SceOntologyEmojiIndexType<T extends SceOntologyBase> = ReturnType<
  * ```
  */
 class SceOntologyInterpreter<T extends SceOntologyBase>
-  implements OntologyInterpreter<T>
-{
+  implements OntologyInterpreter<T> {
   static #defaultInstance: SceOntologyInterpreter<SemanticOntology> | null =
     null;
 
@@ -230,7 +229,7 @@ interface InterpreterOverloads {
    * @param ontology - Custom ontology schema
    * @returns A new interpreter instance
    */
-  <T extends SceOntologyBase>(ontology: T): SceOntologyInterpreter<T>;
+  <T extends Partial<SceOntologyBase>>(ontology: T): SceOntologyInterpreter<T & SceOntologyBase>;
 
   /**
    * Returns the shared default interpreter for {@link SemanticOntology}.
@@ -260,12 +259,15 @@ interface InterpreterOverloads {
  * ```
  */
 export const interpreter: InterpreterOverloads = <
-  T extends SceOntologyBase = SemanticOntology
+  T extends Partial<SceOntologyBase> = SemanticOntology
 >(
   ontology?: T
 ) =>
   ontology
-    ? new SceOntologyInterpreter(ontology)
+    ? new SceOntologyInterpreter({
+      ...SemanticOntologySchema,
+      ...ontology
+    })
     : SceOntologyInterpreter.Default;
 
 /**

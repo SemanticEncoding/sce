@@ -1,23 +1,29 @@
 {
   "name": "@semanticencoding/monorepo",
   "description": "Monorepo root for an open semantic layer enabling LLM-native communication protocols.  Not for distribution.",
+  "workspaces": [
+    "packages/core/ts",
+    "packages/semanticencoding/ts"
+  ],
+  "packageManager": "yarn@4.12.0",
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "build": "tsc -b",
+    "build": "yarn workspace @semanticencoding/core run build && yarn workspace semanticencoding run build",
     "copy-shared": "node ./scripts/copy-shared-to-packages.js",
-    "test": "pnpm -w -r --filter ./packages/**/ts test",
-    "test:cover": "pnpm -w -r --filter ./packages/**/ts test:cover",
-    "lint": "pnpm -w -r --filter ./packages/**/ts lint",
-    "publish:all": "pnpm -r --filter ./packages/**/ts publish --access public",
-    "pack:dry": "pnpm -r pack --json",
-    "clean:build": "pnpm -w -r --filter ./packages/**/ts exec -- rimraf dist .tsbuildinfo",
-    "build:force": "pnpm -w -r --filter ./packages/**/ts exec -- tsc -b --force",
-    "docs": "mkdocs serve",
-    "preinstall": "node preinstall.js"
+    "test": "yarn workspace @semanticencoding/core run test && yarn workspace semanticencoding run test",
+    "test:cover": "yarn workspace @semanticencoding/core run test:cover && yarn workspace semanticencoding run test:cover",
+    "lint": "yarn workspace @semanticencoding/core run lint && yarn workspace semanticencoding run lint",
+    "publish:all": "yarn workspace @semanticencoding/core run publish:all && yarn workspace semanticencoding run publish:all",
+    "pack:dry": "yarn workspace @semanticencoding/core run pack:dry && yarn workspace semanticencoding run pack:dry",
+    "clean:build": "yarn workspace @semanticencoding/core run clean:build && yarn workspace semanticencoding run clean:build",
+    "build:force": "yarn workspace @semanticencoding/core run build:force && yarn workspace semanticencoding run build:force",
+    "docs": "mkdocs serve"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
+    "@swc/core": "^1.13.5",
+    "@swc/jest": "^0.2.39",
     "@types/jest": "^29.5.3",
     "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
@@ -25,7 +31,6 @@
     "eslint": "^9.39.1",
     "jest": "^29.6.1",
     "rimraf": "^6.1.0",
-    "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.9.3"
   },

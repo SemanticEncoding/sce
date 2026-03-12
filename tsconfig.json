@@ -1,11 +1,9 @@
 {
     "files": [],
     "exclude": [
-        "**/dist/**"
-    ],
-    "references": [
-        {
-            "path": "./packages/core/ts"
-        }
+        "**/dist/**",
+        "**/__tests__/**",
+        "**/__mocks__/**",
+        "**/tests/**"
     ]
 }

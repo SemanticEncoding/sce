@@ -4,15 +4,11 @@ module.exports = [
   {
     // global ignores and shared settings
     ignores: [
-      "node_modules/**/*",
-      "**/node_modules/**/*",
-      "dist",
+      "**/node_modules/**",
       "**/dist/**/*",
-      "coverage",
-      "**/coverage/*",
-      "**/coverage/**/*",
+      "**/coverage/**",
       "**/.tsbuildinfo",
-      "packages/**/*",
+      "**/packages/**",
     ],
     languageOptions: {
       ecmaVersion: 2021,

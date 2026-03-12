@@ -1,9 +1,20 @@
-const { defaults: tsjPreset } = require("ts-jest/presets");
+const swcTransform = [
+  "@swc/jest",
+  {
+    jsc: {
+      parser: {
+        syntax: "typescript",
+        tsx: true,
+      },
+    },
+    module: {
+      type: "commonjs",
+    },
+  },
+];
 
 module.exports = {
-  ...tsjPreset,
   testEnvironment: "node",
-  collectCoverage: true,
   coverageDirectory: "coverage",
   coverageReporters: ["text", "lcov"],
   coverageThreshold: {
@@ -14,19 +25,16 @@ module.exports = {
       statements: 90,
     },
   },
-  roots: ["<rootDir>/src", "<rootDir>/tests"],
+  roots: ["<rootDir>/tests"],
   testMatch: ["**/?(*.)+(spec|test).[jt]s?(x)"],
   moduleFileExtensions: ["ts", "js", "json", "node"],
   moduleNameMapper: {
+    "^@semanticencoding/([^/]+)(/.*)?$": "<rootDir>/../../$1/ts/src$2",
     "^(\\.{1,2}/.*)\\.js$": "$1",
   },
   transform: {
-    ...tsjPreset.transform,
     "^.+\\.[tj]sx?$": [
-      "ts-jest",
-      {
-        tsconfig: "<rootDir>/tsconfig.jest.json",
-      },
+      ...swcTransform,
     ],
   },
 };
