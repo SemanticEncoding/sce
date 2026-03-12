@@ -29,7 +29,6 @@ jobs:
         shell: bash
 
       - name: Run yarn install
-        working-directory: ./web-ui
         run: node .yarn/releases/yarn-4.12.0.cjs install --immutable
         shell: bash
 
