@@ -21,7 +21,6 @@ jobs:
           node-version: "25.x"
           cache: yarn
           cache-dependency-path: 'yarn.lock'
-          # cache: "pnpm"
 
       - name: Enable Corepack and Yarn 4.12.0
         run: |
@@ -31,9 +30,7 @@ jobs:
 
       - name: Run yarn install
         working-directory: ./web-ui
-        run: |
-          set -euo pipefail
-          node .yarn/releases/yarn-4.12.0.cjs install --immutable
+        run: node .yarn/releases/yarn-4.12.0.cjs install --immutable
         shell: bash
 
       - name: Lint
