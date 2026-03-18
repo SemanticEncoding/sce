@@ -8,7 +8,8 @@ dist
 # Coverage and editor state
 coverage/
 .vscode/
-.turbo
+**/.turbo
+**/.turbo/**
 .DS_Store
 
 # yarn
