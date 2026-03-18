@@ -48,8 +48,8 @@
     "access": "public"
   },
   "scripts": {
-    "prepack": "tsc -b",
-    "build": "tsc -b",
+    "prepack": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
     "build:publish": "yarn build && yarn pack --out ./dist/@semanticencoding-core.tgz",
     "lint": "eslint --config ./eslint.config.cjs",
     "test": "jest --config ./jest.config.cjs",
