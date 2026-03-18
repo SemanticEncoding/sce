@@ -2,6 +2,8 @@ node_modules
 dist
 # TypeScript build info
 **/.tsbuildinfo
+**/*.log
+
 
 # Coverage and editor state
 coverage/
