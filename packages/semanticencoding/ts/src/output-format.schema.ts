@@ -1,5 +1,12 @@
 import { z } from "zod";
 
+export type OutputFormatType = "auto" | "pretty" | "json" | "hybrid";
+
+export type OutputFormat = {
+    type?: OutputFormatType;
+    color?: boolean;
+};
+
 export const OutputFormatSchema = z
     .object({
         type: z
@@ -15,5 +22,3 @@ export const OutputFormatSchema = z
     })
     .partial()
     .default({});
-
-export type OutputFormat = z.infer<typeof OutputFormatSchema>;
