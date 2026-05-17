@@ -20,16 +20,19 @@
     "build:force": "yarn workspace @semanticencoding/core run build:force && yarn workspace semanticencoding run build:force",
     "docs": "mkdocs serve"
   },
+  "resolutions": {
+    "jest-mock": "patch:jest-mock@npm%3A30.0.5#../../../patches/jest-mock-npm-30.0.5.patch"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
     "@swc/core": "^1.13.5",
     "@swc/jest": "^0.2.39",
-    "@types/jest": "^29.5.3",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
     "eslint": "^9.39.1",
-    "jest": "^29.6.1",
+    "jest": "30.0.5",
     "rimraf": "^6.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.9.3"

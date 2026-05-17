@@ -56,8 +56,8 @@
     "build": "yarn exec tsc -p tsconfig.json",
     "build:publish": "yarn build && yarn pack --out ./dist/semanticencoding.tgz",
     "lint": "eslint --config ./eslint.config.cjs",
-    "test": "jest --config ./jest.config.cjs",
-    "test:cover": "jest --coverage --config ./jest.config.cjs"
+    "test": "yarn --cwd ../../../ exec jest --config ./packages/semanticencoding/ts/jest.config.cjs",
+    "test:cover": "yarn --cwd ../../../ exec jest --coverage --config ./packages/semanticencoding/ts/jest.config.cjs"
   },
   "devDependencies": {
     "@types/node": "25.2.3",
